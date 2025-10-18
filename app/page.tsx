@@ -1,4 +1,6 @@
 import Image from "next/image";
+import React from "react";
+import CompanyModal from "@/components/CompanyModal";
 
 export default function Home() {
   return (
@@ -98,6 +100,7 @@ export default function Home() {
           Go to nextjs.org →
         </a>
       </footer>
+      <CompanyModal />
     </div>
   );
 }
