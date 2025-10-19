@@ -1,4 +1,5 @@
 import unusedImports from "eslint-plugin-unused-imports";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 
 export default [
   {
@@ -18,5 +19,6 @@ export default [
         },
       ],
     },
+    ...pluginQuery.configs["flat/recommended"],
   },
 ];
