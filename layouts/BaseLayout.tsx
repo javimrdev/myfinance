@@ -20,7 +20,7 @@ export const BaseLayout = ({ children }: { children: React.ReactNode }) => {
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <Topnav />
-          <div className="px-2 lg-px-5">{children}</div>
+          <div className="container mx-auto py-4">{children}</div>
         </body>
       </html>
     </>
