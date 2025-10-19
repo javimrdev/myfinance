@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./../app/globals.css";
 import { Topnav } from "@/components/Topnav/Topnav";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const queryClient = new QueryClient();
+
 export const BaseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
@@ -19,8 +22,10 @@ export const BaseLayout = ({ children }: { children: React.ReactNode }) => {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Topnav />
-          <div className="container mx-auto py-4">{children}</div>
+          <QueryClientProvider client={queryClient}>
+            <Topnav />
+            <div className="container mx-auto py-4">{children}</div>
+          </QueryClientProvider>
         </body>
       </html>
     </>
