@@ -2,7 +2,6 @@
 
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
@@ -14,7 +13,7 @@ import { UserAvatar } from "../UserAvatar/UserAvatar";
 
 export const Topnav = () => {
   return (
-    <div className="w-full grid grid-cols-3 items-center gap-2 py-6 px-3 border-b border-b border-green-500">
+    <div className="w-full grid grid-cols-3 items-center gap-2 py-6 px-3 border-b border-green-700">
       <div className="flex flex-start">
         <Logo />
       </div>
@@ -26,7 +25,12 @@ export const Topnav = () => {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/">Dashboard</Link>
+                <Link
+                  className="bg-transparent hover:bg-green-900 text-white hover:text-white"
+                  href="/"
+                >
+                  Dashboard
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>

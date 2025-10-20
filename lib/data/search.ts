@@ -1,33 +1,22 @@
-import { NextResponse } from "next/server";
 import z from "zod";
-import YahooFinance from "yahoo-finance2";
+import { StockBaseInfo } from "../types/StockBaseInfo";
 
-const getSchema = z.object({
-  name: z.string().nonempty(),
+const schema = z.object({
+  symbol: z.string(),
 });
 
-export async function GET(req: Request) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const name = searchParams.get("name");
-    const parsedSchema = getSchema.safeParse({ name });
+export const searchSymbol = async (symbol: string): Promise<StockBaseInfo> => {
+  const parsed = schema.safeParse({ symbol });
 
-    if (!parsedSchema.success) {
-      return NextResponse.json(
-        { error: "Name parameter is required" },
-        { status: 400 }
-      );
-    }
-
-    const yahooFinance = new YahooFinance();
-    const result = await yahooFinance.search(parsedSchema.data.name);
-
-    return NextResponse.json({ success: true, data: result });
-  } catch (error) {
-    console.error("Error fetching search information:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+  if (!parsed.success) {
+    throw new Error(`Invalid symbol: ${parsed.error.message}`);
   }
-}
+
+  const response = await fetch(
+    `/api/search?symbol=${encodeURIComponent(symbol)}`
+  );
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return await response.json();
+};
