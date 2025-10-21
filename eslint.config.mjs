@@ -1,13 +1,21 @@
 import unusedImports from "eslint-plugin-unused-imports";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 
-export default [
+const compat = new FlatCompat({
+  baseDirectory: import.meta.dirname,
+  recommendedConfig: js.configs.recommended,
+});
+
+const eslintConfig = [
+  ...compat.config({
+    extends: ["eslint:recommended", "next"],
+  }),
   {
     plugins: {
       "unused-imports": unusedImports,
     },
     rules: {
-      "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+      "no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
         "warn",
@@ -22,3 +30,5 @@ export default [
     ...pluginQuery.configs["flat/recommended"],
   },
 ];
+
+export default eslintConfig;
