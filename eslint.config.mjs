@@ -1,14 +1,19 @@
 import unusedImports from "eslint-plugin-unused-imports";
 import pluginQuery from "@tanstack/eslint-plugin-query";
+import { FlatCompat } from "@eslint/eslintrc";
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
-  recommendedConfig: js.configs.recommended,
 });
 
 const eslintConfig = [
   ...compat.config({
-    extends: ["eslint:recommended", "next"],
+    extends: [
+      "eslint:recommended",
+      "next",
+      "next/core-web-vitals",
+      "next/typescript",
+    ],
   }),
   {
     plugins: {
