@@ -1,5 +1,4 @@
 import unusedImports from "eslint-plugin-unused-imports";
-import pluginQuery from "@tanstack/eslint-plugin-query";
 import { FlatCompat } from "@eslint/eslintrc";
 
 const compat = new FlatCompat({
@@ -7,6 +6,17 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    ignores: [
+      "node_modules",
+      ".next",
+      "dist",
+      "build",
+      "out",
+      "coverage",
+      "public",
+    ],
+  },
   ...compat.config({
     extends: [
       "eslint:recommended",
@@ -32,7 +42,6 @@ const eslintConfig = [
         },
       ],
     },
-    ...pluginQuery.configs["flat/recommended"],
   },
 ];
 
