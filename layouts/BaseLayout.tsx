@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./../app/globals.css";
 import { Topnav } from "@/components/Topnav/Topnav";
 import TanstackQueryProvider from "@/lib/TanstackQueryProvider/TanstackQueryProvider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +25,7 @@ export const BaseLayout = ({ children }: { children: React.ReactNode }) => {
             <Topnav />
             <div className="container mx-auto py-4">{children}</div>
           </TanstackQueryProvider>
+          <Toaster position="top-right" closeButton />
         </body>
       </html>
     </>
