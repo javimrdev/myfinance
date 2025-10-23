@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,12 +32,12 @@ export const AddStockButton = () => {
   const form = useForm({
     defaultValues: defaultFormValues,
     onSubmit: async () => {
-      console.log("lo intenta", form.state.values.symbol);
       const { isSuccess } = await query.refetch();
       if (isSuccess === false) {
         alert("Error fetching symbol data");
       } else {
         setSymbol(form.state.values.symbol);
+        toast.info("Por favor completa la información de compra");
         router.push("/add-symbol");
       }
     },
@@ -68,17 +69,16 @@ export const AddStockButton = () => {
           >
             <form.Field
               name="symbol"
+              // eslint-disable-next-line react/no-children-prop
               children={(field) => (
                 <>
                   <Label htmlFor="symbol">Stock symbol</Label>
-
                   <Input
                     id="symbol"
                     placeholder="e.g. AAPL"
                     value={field.state.value}
                     onChange={(e) => {
                       const value = e.target.value;
-                      console.log("Symbol cambió a:", value);
                       field.handleChange(value);
                     }}
                   />
