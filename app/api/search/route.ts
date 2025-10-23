@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getStockInfo } from "@/lib/data/stockInfo";
 import z from "zod";
 
+export const dynamic = "force-dynamic";
+
 const getSchema = z.object({
   symbol: z.string().nonempty(),
 });
